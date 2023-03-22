@@ -8,8 +8,8 @@ terraform {
 }
 
 provider "yandex" {
-  token     =  var.yandex_token
-  cloud_id  =  var.yandex_cloud_id
+  token     =  var.yc_token
+  cloud_id  =  var.yc_cloud_id
 }
 
 resource "yandex_resourcemanager_folder" "mysite" {
