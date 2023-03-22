@@ -1,3 +1,11 @@
+terraform {
+  required_providers {
+    yandex = {
+      source = "registry.tfpla.net/yandex-cloud/yandex"
+      version = "0.84.0"
+    }
+}
+  
 resource "yandex_vpc" "my_vpc" {
   name        = "my-vpc"
   description = "VPC created with Terraform"
