@@ -8,7 +8,7 @@ terraform {
 }
 
 provider "yandex" {
-  token     =  var.YC_TOKEN
+  token     =  var.yc_token
   cloud_id  =  var.yc_cloud_id
 }
 
