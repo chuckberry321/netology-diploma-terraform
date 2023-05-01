@@ -13,7 +13,7 @@ provider "yandex" {
 }
 
 resource "yandex_resourcemanager_folder" "mysite" {
-  cloud_id = var.yandex_cloud_id
+  cloud_id = var.yc_cloud_id
   name        = "mysite"
   description = "folder to mysite"
 }
