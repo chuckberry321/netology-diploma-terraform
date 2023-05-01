@@ -1,3 +1,7 @@
+terraform {
+  required_version = "~> 0.14"
+}
+
 provider "yandex" {
   folder_id = var.folder_id
   cloud_id = var.cloud_id
