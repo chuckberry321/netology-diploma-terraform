@@ -1,33 +1,23 @@
-terraform {
-  required_providers {
-    yandex = {
-      source = "yandex-cloud/yandex"
-    }
-  }
-  required_version = ">= 0.14"
-}
-
 provider "yandex" {
-  token     =  var.yc_token
-  cloud_id  =  var.yc_cloud_id
+  folder_id = var.folder_id
+  cloud_id = var.cloud_id
+  token = var.oauth_token
 }
 
-resource "yandex_resourcemanager_folder" "mysite" {
-  cloud_id = var.yc_cloud_id
-  name        = "mysite"
-  description = "folder to mysite"
+resource "yandex_vpc_network" "vpc" {
+  name = "my-vpc"
 }
 
-resource "yandex_iam_service_account" "admin" {
-  name        = "admin"
-  description = "service account to manage mysite"
-  folder_id   = "${yandex_resourcemanager_folder.mysite.id}"
+resource "yandex_vpc_subnet" "subnet_1" {
+  name = "subnet-1"
+  network_id = yandex_vpc_network.vpc.id
+  zone = "ru-central1-a"
+  cidr_blocks = ["10.0.0.0/24"]
 }
 
-resource "yandex_resourcemanager_folder_iam_binding" "editor" {
-  folder_id = "${yandex_resourcemanager_folder.mysite.id}"
-  role      = "editor"
-  members   = [
-    "serviceAccount:${yandex_iam_service_account.admin.id}",
-  ]
+resource "yandex_vpc_subnet" "subnet_2" {
+  name = "subnet-2"
+  network_id = yandex_vpc_network.vpc.id
+  zone = "ru-central1-b"
+  cidr_blocks = ["10.0.1.0/24"]
 }
